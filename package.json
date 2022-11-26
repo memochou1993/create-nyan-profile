@@ -1,0 +1,13 @@
+{
+  "name": "@memochou1993/create-nyan-profile",
+  "version": "1.0.0",
+  "description": "Set up Nyan Profile by running one command.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Memo Chou",
+  "license": "MIT",
+  "bin": {
+    "create-nyan-profile": "bin/install.sh"
+  }
+}
