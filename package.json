@@ -1,9 +1,13 @@
 {
   "name": "@memochou1993/create-nyan-profile",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Set up Nyan Profile by running one command.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/memochou1993/create-nyan-profile.git"
   },
   "author": "Memo Chou",
   "license": "MIT",
