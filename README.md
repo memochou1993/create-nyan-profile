@@ -7,13 +7,13 @@ To create a new profile, you may choose one of the following methods:
 ### npx
 
 ```bash
-npx @memochou1993/create-nyan-profile my-profile
+npx @memochou1993/create-nyan-profile
 ```
 
 ### npm
 
 ```bash
-npm init @memochou1993/nyan-profile my-profile
+npm init @memochou1993/nyan-profile
 ```
 
 ## Contributors
