@@ -31,5 +31,5 @@ modify(`${dir}/package.json`, /\"nyan-profile\"/g, `"${dir}"`);
 modify(`${dir}/package-lock.json`, /\"nyan-profile\"/g, `"${dir}"`);
 modify(`${dir}/docker-compose.yaml`, /\"nyan-profile\"/g, `"${dir}"`);
 modify(`${dir}/nyan.config.json`, /\"\/nyan-profile\"/g, `"/${dir}"`);
-exec(`cd ${dir} && rm -rf .git && git add . && git commit -m "Initial commit"`);
+exec(`cd ${dir} && rm -rf ./.git && git add . && git commit -m "Initial commit"`);
 exec(`cd ${dir} && npm ci`);
