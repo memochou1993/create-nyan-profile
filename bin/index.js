@@ -3,21 +3,23 @@
 const fs = require('fs')
 const { execSync } = require('child_process');
 
-const exec = (command) => {
+const exec = (command) => new Promise((resolve) => {
   execSync(command, {
     stdio: 'inherit',
   });
-};
+  resolve();
+});
 
-const modify = (someFile, searchValue, replaceValue) => {
-  fs.readFile(someFile, 'utf8', (err, data) => {
+const modify = (file, searchValue, replaceValue) => new Promise((resolve) => {
+  fs.readFile(file, 'utf8', (err, data) => {
     if (err) throw err;
     const result = data.replace(searchValue, replaceValue);
-    fs.writeFile(someFile, result, 'utf8', (err) => {
+    fs.writeFile(file, result, 'utf8', (err) => {
       if (err) throw err;
+      resolve();
     });
   });
-};
+});
 
 const dir = process.argv[2];
 
@@ -26,10 +28,12 @@ if (!dir) {
   return;
 }
 
-exec(`git clone git@github.com:memochou1993/nyan-profile.git ${dir}`);
-modify(`${dir}/package.json`, /\"nyan-profile\"/g, `"${dir}"`);
-modify(`${dir}/package-lock.json`, /\"nyan-profile\"/g, `"${dir}"`);
-modify(`${dir}/docker-compose.yaml`, /\"nyan-profile\"/g, `"${dir}"`);
-modify(`${dir}/nyan.config.json`, /\"\/nyan-profile\"/g, `"/${dir}"`);
-exec(`cd ${dir} && rm -rf .git && git init && git add . && git commit -m "Initial commit"`);
-exec(`cd ${dir} && npm ci`);
+(async () => {
+  await exec(`git clone git@github.com:memochou1993/nyan-profile.git ${dir}`);
+  await modify(`${dir}/package.json`, /\"nyan-profile\"/g, `"${dir}"`);
+  await modify(`${dir}/package-lock.json`, /\"nyan-profile\"/g, `"${dir}"`);
+  await modify(`${dir}/docker-compose.yaml`, /\"nyan-profile\"/g, `"${dir}"`);
+  await modify(`${dir}/nyan.config.json`, /\"\/nyan-profile\"/g, `"/${dir}"`);
+  await exec(`cd ${dir} && rm -rf .git && git init && git add . && git commit -m "Initial commit"`);
+  await exec(`cd ${dir} && npm ci`);
+})();
